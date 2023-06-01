@@ -40,7 +40,6 @@ const DateTimePickerModal = memo(
         } else if (currentMode === "time") {
           const year = currentDateRef.current.getFullYear();
           const month = currentDateRef.current.getMonth();
-          const day = currentDateRef.current.getDate();
           const hours = selectedDate.getHours();
           const minutes = selectedDate.getMinutes();
           nextDate = new Date(year, month, day, hours, minutes);
