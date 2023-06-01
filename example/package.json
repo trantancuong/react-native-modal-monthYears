@@ -1,0 +1,25 @@
+{
+  "name": "Example",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "react-native start",
+    "postinstall": "node ../scripts/examples_postinstall.js",
+    "setup": "rm -rf node_modules ios/Pods && yarn install && cd ios && pod install && yarn copy",
+    "copy": "rm -rf node_modules/react-native-modal-datetime-picker/src/ && cp -Rv ../src node_modules/react-native-modal-datetime-picker/src"
+  },
+  "dependencies": {
+    "@react-native-community/datetimepicker": "*",
+    "react": "16.13.1",
+    "react-native": "0.63.2",
+    "react-native-modal-datetime-picker": "file:../"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.1",
+    "@babel/runtime": "^7.11.2",
+    "metro-react-native-babel-preset": "^0.62.0"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
