@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, memo } from "react";
 import PropTypes from "prop-types";
-import DateTimePicker from "@react-native-community/datetimepicker";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 const areEqual = (prevProps, nextProps) => {
   return (
@@ -16,7 +16,7 @@ const DateTimePickerModal = memo(
 
     useEffect(() => {
       if (isVisible && currentMode === null) {
-        setCurrentMode(mode === "time" && "time" || "date" || "monthYears");
+        setCurrentMode(mode === "time" ? "time" : mode === "monthYears" ? "date" : "date");
       } else if (!isVisible) {
         setCurrentMode(null);
       }
@@ -24,8 +24,8 @@ const DateTimePickerModal = memo(
 
     if (!isVisible || !currentMode) return null;
 
-    const handleChange = (event, selectedDate) => {
-      if (event.type === "dismissed") {
+    const handleChange = (selectedDate) => {
+      if (!selectedDate) {
         onCancel();
         onHide(false);
         return;
@@ -56,11 +56,13 @@ const DateTimePickerModal = memo(
     };
 
     return (
-      <DateTimePicker
+      <DateTimePickerModal
         {...otherProps}
+        isVisible={isVisible}
         mode={currentMode}
-        value={date}
-        onChange={handleChange}
+        date={date}
+        onCancel={handleChange}
+        onConfirm={handleChange}
       />
     );
   },
@@ -80,8 +82,7 @@ DateTimePickerModal.propTypes = {
 DateTimePickerModal.defaultProps = {
   date: new Date(),
   isVisible: false,
-  onHide: () => {
-  }
+  onHide: () => {}
 };
 
 export { DateTimePickerModal };
