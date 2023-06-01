@@ -38,12 +38,7 @@ const DateTimePickerModal = memo(
           currentDateRef.current = new Date(selectedDate);
           return;
         } else if (currentMode === "time") {
-          const year = currentDateRef.current.getFullYear();
-          const month = currentDateRef.current.getMonth();
-          const day = currentDateRef.current.getDay();
-          const hours = selectedDate.getHours();
-          const minutes = selectedDate.getMinutes();
-          nextDate = new Date(year, month, day, hours, minutes);
+          console.log("time")
         }
       } else if (mode === "monthYears") {
         const year = selectedDate.getFullYear();
